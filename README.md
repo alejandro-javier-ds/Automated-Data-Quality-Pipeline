@@ -68,11 +68,11 @@ graph TD
 
 ## 4. **CORE ENGINEERING PRINCIPLES & OPTIMIZATIONS**
 
-   #### **4.1. High-Performance Vectorized Validation Engine**
-   Traditional iterative data processing algorithms iterating over large datasets cause severe memory bottlenecks and unacceptable latency. This pipeline is optimized entirely using Pandas boolean masking and vectorized operations (`np.select`). By applying mathematical and logical validations across entire columns simultaneously in memory, the engine evaluates 100,000+ records against multiple complex rulesets in seconds.
+#### **4.1. High-Performance Vectorized Validation Engine**
+Traditional iterative data processing algorithms iterating over large datasets cause severe memory bottlenecks and unacceptable latency. This pipeline is optimized entirely using Pandas boolean masking and vectorized operations (`np.select`). By applying mathematical and logical validations across entire columns simultaneously in memory, the engine evaluates 100,000+ records against multiple complex rulesets in seconds.
 
-   #### **4.2. Transactional Safety & ORM Integration** 
-   Database operations are not handled via fragile raw string query execution. The pipeline utilizes the SQLAlchemy Object-Relational Mapper (ORM) combined with the pyodbc driver. This implementation ensures:
+#### **4.2. Transactional Safety & ORM Integration** 
+Database operations are not handled via fragile raw string query execution. The pipeline utilizes the SQLAlchemy Object-Relational Mapper (ORM) combined with the pyodbc driver. This implementation ensures:
 
 * Intelligent connection pooling and resource optimization.
 
@@ -80,29 +80,29 @@ graph TD
 
 * Robust deadlock prevention and advanced timeout management when interfacing with the SQL Server instance under heavy load.
 
-   #### **4.3. Real-Time Data Observability & Monitoring**
-   A built-in Streamlit frontend acts as the Data Quality Control Center. Built with strict Decoupled Architecture principles, the UI strictly operates in Read-Only mode, leveraging `@st.cache_data` to protect the database from query overloading while providing instant analytical insights.
+#### **4.3. Real-Time Data Observability & Monitoring**
+A built-in Streamlit frontend acts as the Data Quality Control Center. Built with strict Decoupled Architecture principles, the UI strictly operates in Read-Only mode, leveraging `@st.cache_data` to protect the database from query overloading while providing instant analytical insights.
 
 ## 5. **DETAILED DATA QUALITY RULES ENGINE**
 The engine evaluates all incoming transactional records against a strict, multi-layered set of business and logical rules:
 
-   1. **Relational & Completeness Integrity:** Scans for null values, NaNs, or empty strings in critical categorical dimensions to definitively prevent orphaned records (`Missing/Null Values`).
+1. **Relational & Completeness Integrity:** Scans for null values, NaNs, or empty strings in critical categorical dimensions to definitively prevent orphaned records (`Missing/Null Values`).
 
-   2. **Mathematical Boundary Checks:** Enforces absolute logical consistency on quantitative fields (e.g., ensuring `Quantity > 0` and `Unit_Price >= 0.00`). Transactions violating these financial boundaries are instantly flagged.
+2. **Mathematical Boundary Checks:** Enforces absolute logical consistency on quantitative fields (e.g., ensuring `Quantity > 0` and `Unit_Price >= 0.00`). Transactions violating these financial boundaries are instantly flagged.
 
-   3. **Syntax & Pattern Recognition:** Utilizes highly optimized Regular Expressions (Regex) to validate string formats. For instance, ensuring that all Email fields conform strictly to standard email address patterns (`Malformed Email`).
+3. **Syntax & Pattern Recognition:** Utilizes highly optimized Regular Expressions (Regex) to validate string formats. For instance, ensuring that all Email fields conform strictly to standard email address patterns (`Malformed Email`).
 
 ## 6. **COMPREHENSIVE TECHNOLOGY STACK & RATIONALE**
 
-   * **Database Engine:** SQL Server (Transact-SQL). Chosen for its enterprise ubiquity, strict ACID compliance, and robust DDL structure.
+* **Database Engine:** SQL Server (Transact-SQL). Chosen for its enterprise ubiquity, strict ACID compliance, and robust DDL structure.
 
-   * **Core Processing Engine:** SQL Server (Transact-SQL). Chosen for its enterprise ubiquity, strict ACID compliance, and robust DDL structure.
+* **Core Processing Engine:** SQL Server (Transact-SQL). Chosen for its enterprise ubiquity, strict ACID compliance, and robust DDL structure.
 
-   * **Data Manipulation Framework:** Pandas & NumPy. Chosen over distributed frameworks because the current volume threshold and single-node batch processing requirements are perfectly optimized through vectorization.
+* **Data Manipulation Framework:** Pandas & NumPy. Chosen over distributed frameworks because the current volume threshold and single-node batch processing requirements are perfectly optimized through vectorization.
 
-   * **Connectivity & Middleware:** PyODBC & SQLAlchemy. The industry gold standard for secure, reliable, and efficient relational database connectivity.
+* **Connectivity & Middleware:** PyODBC & SQLAlchemy. The industry gold standard for secure, reliable, and efficient relational database connectivity.
 
-   * **Observability UI:** Streamlit & Plotly Express. Allows for the rapid deployment of a data-driven web application with interactive charting.   
+* **Observability UI:** Streamlit & Plotly Express. Allows for the rapid deployment of a data-driven web application with interactive charting.   
 
 ## 7. **SCALABILITY & CLOUD MIGRATION ROADMAP**
 While this repository demonstrates a highly optimized local architecture, the codebase is structurally prepared for seamless migration to enterprise cloud environments:
