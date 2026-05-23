@@ -74,12 +74,11 @@ graph TD
    #### **4.2. Transactional Safety & ORM Integration** 
    Database operations are not handled via fragile raw string query execution. The pipeline utilizes the SQLAlchemy Object-Relational Mapper (ORM) combined with the pyodbc driver. This implementation ensures:
 
-      * Intelligent connection pooling and resource optimization.
+* Intelligent connection pooling and resource optimization.
 
-      * Atomic batch writing, robust connection pooling, and utilizes the fast_executemany=True parameter to perform true Bulk Inserts from Python to SQL Server.
+* Atomic batch writing, robust connection pooling, and utilizes the fast_executemany=True parameter to perform true Bulk Inserts from Python to SQL Server.
 
-      * Robust deadlock prevention and advanced timeout management when interfacing with the SQL Server instance under
-      heavy load.
+* Robust deadlock prevention and advanced timeout management when interfacing with the SQL Server instance under heavy load.
 
    #### **4.3. Real-Time Data Observability & Monitoring**
    A built-in Streamlit frontend acts as the Data Quality Control Center. Built with strict Decoupled Architecture principles, the UI strictly operates in Read-Only mode, leveraging `@st.cache_data` to protect the database from query overloading while providing instant analytical insights.
