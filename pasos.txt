@@ -1,0 +1,48 @@
+====================================================================
+DEPLOYMENT GUIDE: AUTOMATED DATA QUALITY PIPELINE
+====================================================================
+
+PREREQUISITES
+- Python 3.8+
+- SQL Server (LocalDB, Express, or Developer Edition)
+- ODBC Driver for SQL Server (v17 or v18)
+
+PHASE 1: DATABASE INITIALIZATION
+1. Connect to the target SQL Server instance.
+2. Execute the provided SQL script to provision the [PortafolioDB] database.
+3. Verify the creation and initial population of the staging table [dbo].[VentasCrudas].
+
+PHASE 2: ENVIRONMENT CONFIGURATION
+1. Initialize a Python virtual environment:
+   > python -m venv venv
+2. Activate the environment:
+   > venv\Scripts\activate     (Windows)
+   > source venv/bin/activate  (Mac/Linux)
+3. Install required dependencies:
+   > pip install -r requirements.txt
+
+PHASE 3: INSTANCE CONFIGURATION
+1. Locate the 'SERVER_NAME' parameter within 'main.py' and 'app.py'.
+2. Target 'SERVER_NAME' to the designated SQL Server instance:
+   - LocalDB: r'(localdb)\MSSQLLocalDB'
+   - Express: 'localhost\SQLEXPRESS'
+   *Note: For production deployments, these parameters must be migrated to environment variables.*
+
+PHASE 4: ETL PIPELINE EXECUTION (BACKEND)
+1. Execute the core audit engine:
+   > python main.py
+2. Validate the physical isolation of records in the database. The system automatically provisions two target tables:
+   - [dbo].[VentasLimpias]: Validated data cleared for BI downstream ingestion.
+   - [dbo].[VentasBasura]: Quarantined anomalous data for auditing.
+
+PHASE 5: OBSERVABILITY DASHBOARD (FRONTEND)
+1. Launch the Streamlit monitoring interface:
+   > streamlit run app.py
+2. Access the dashboard via the local port (default: http://localhost:8501).
+3. Utilize the control panel to trigger real-time SQL Server synchronizations and metric recalculations.
+
+====================================================================
+TROUBLESHOOTING
+- Connection Error (Login failed): Ensure the SQL Server instance is configured to accept Windows Authentication (Trusted_Connection=yes).
+- ODBC Driver Error: Verify the installation of 'ODBC Driver 17/18 for SQL Server' in the host OS environment.
+====================================================================

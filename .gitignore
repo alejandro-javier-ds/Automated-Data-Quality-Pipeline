@@ -1,0 +1,17 @@
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.local
+.streamlit/secrets.toml
+*.csv
+*.xlsx
+*.parquet
+*.db
+*.sqlite3
+*.log
+.pytest_cache/
+.coverage
