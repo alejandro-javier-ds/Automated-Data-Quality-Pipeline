@@ -11,7 +11,7 @@
 
 ## 1. **EXECUTIVE SUMMARY & BUSINESS CONTEXT**
 
-In modern enterprise data ecosystems, the integrity of the semantic layer is paramount. "Silent data degradation"—characterized by orphaned foreign keys, negative quantities, syntax formatting errors, and anomalous metrics in raw staging tables—can seamlessly corrupt downstream Business Intelligence (BI) reporting. When C-level executives and key stakeholders consume dashboards built on flawed data, it leads to inaccurate forecasting, compliance breaches, and ultimately, poor strategic decision-making.
+In modern enterprise data ecosystems, the integrity of the semantic layer is paramount. "Silent data degradation" characterized by orphaned foreign keys, negative quantities, syntax formatting errors, and anomalous metrics in raw staging tables can seamlessly corrupt downstream Business Intelligence (BI) reporting. When C-level executives and key stakeholders consume dashboards built on flawed data, it leads to inaccurate forecasting, compliance breaches, and ultimately, poor strategic decision-making.
 
 This project implements a robust, automated End-to-End (E2E) ETL and Data Quality (DQ) pipeline designed to proactively scan, isolate, and log anomalies in SQL Server databases before they ever reach production Data Marts. Acting as an automated data gatekeeper, it shifts the data validation process "to the left" (validating strictly at the ingestion phase), ensuring a pristine Single Source of Truth for corporate analytics.
 
